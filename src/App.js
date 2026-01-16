@@ -1,21 +1,45 @@
-import React from "react";
+import React, { useState, useRef } from "react";
 import "./css/App.css";
 import "./LogoLoop.js";
 import LogoLoop from "./LogoLoop";
 import Threads from "./Threads";
+import ProjectCard from "./ProjectCard";
+
+import cSharp from "./Images/TechImages/C-Sharp_Logo.svg";
+import cpp from "./Images/TechImages/cpp.svg";
+import css from "./Images/TechImages/css.svg";
+import gitH from "./Images/TechImages/github.svg";
+import htmx from "./Images/TechImages/htmx.svg";
+import js from "./Images/TechImages/javascript.svg";
+import python from "./Images/TechImages/python.svg";
+import meta from "./Images/TechImages/meta.svg";
+import node from "./Images/TechImages/nodedotjs.svg";
+import sql from "./Images/TechImages/postgresql.svg";
+import reactImage from "./Images/TechImages/react.svg";
+import unity from "./Images/TechImages/unity.svg";
+import ocaml from "./Images/TechImages/ocaml.svg";
+import html from "./Images/TechImages/html.svg";
 
 const Projects = [
   {
-    title: "Full-Stack POS System",
-    image: require("./blue.jpg"),
-    description: "End-to-end POS platform with kiosk, cashier, manager, and kitchen systems.",
+    title: "Panda Express POS Ecosystem",
+    images: [
+      require("./Images/panda/pandaAI.png"),
+      require("./Images/panda/cashier.png"),
+      require("./Images/panda/kiosk.png"),
+      require("./Images/panda/kitchen.png"),
+      require("./Images/panda/man.png"),
+      require("./Images/panda/pandaMain.png"),
+      require("./Images/panda/pandaLogin.png"),
+    ],
+    description: "Full-stack restaurant management app. Features include a Kiosk with Gemini-powered assistant, cashier workflow, inventory, menu, and employee management, and real-time charts for branch performance, menu, and kitchen tracking. Feel free to explore globally deployed application using these logins: \n \n Manager: username: testMan, password: password. \n EmployeeLogin: username: testUser, password: password.",
     technologies: "React, Node.js, Express, MongoDB",
     gitHubLink: "https://github.com/connorrussi/Full-Stack-POS-System",
-    deployedLink: "https://fullstackpossystem.example.com",
+    deployedLink: "https://csce331-project-3-team34-dueo.onrender.com",
   },
   {
     title: "VR Educational Game",
-    image: require("./yellow.png"),
+    images: [require("./yellow.png"), require("./blue.jpg"), require("./red.jpg")],
     description: "Immersive VR game focused on education and interaction.",
     technologies: "Unity, C#, Oculus SDK",
     gitHubLink: "https://github.com/connorrussi/VR-Educational-Game",
@@ -23,23 +47,10 @@ const Projects = [
   },
   {
     title: "Single Core Y-86 Sequential architecture CPU",
-    image: require("./red.jpg"),
+    images: [require("./red.jpg"), require("./blue.jpg"), require("./yellow.png")],
     description: "Single-core sequential CPU implementing fetch, execute, and PC update stages.",
     technologies: "Computer Architecture",
   },
-  {
-    title: "Single Core Y-86 Sequential architecture CPU",
-    image: require("./red.jpg"),
-    description: "Single-core sequential CPU implementing fetch, execute, and PC update stages.",
-    technologies: "Computer Architecture",
-  },
-  {
-    title: "Single Core Y-86 Sequential architecture CPU",
-    image: require("./red.jpg"),
-    description: "Single-core sequential CPU implementing fetch, execute, and PC update stages.",
-    technologies: "Computer Architecture",
-  },
-  
 ];
 
 const Experience = [
@@ -60,29 +71,62 @@ const Experience = [
 ];
 const technologies = [
   {
+    name: "C++",
+    img: cpp,
+  },
+  {
+    name: "Css",
+    img: css,
+  },
+  {
+    name: "HTML",
+    img: html,
+  },
+  {
+    name: "C#",
+    img: cSharp,
+  },
+  {
+    name: "GitHub",
+    img: gitH,
+  },
+  {
+    name: "Htmx",
+    img: htmx,
+  },
+  {
+    name: "JavaScript",
+    img: js,
+  },
+  {
+    name: "Python",
+    img: python,
+  },
+  {
+    name: "Meta",
+    img: meta,
+  },
+  {
+    name: "Node.js",
+    img: node,
+  },
+  {
+    name: "SQL",
+    img: sql,
+  },
+  {
     name: "React",
-    img: require("./red.jpg"),
+    img: reactImage,
   },
   {
-    name: "Node.js",
-    img: require("./blue.jpg"),
+    name: "Unity",
+    img: unity,
   },
-  // {
-  //   name: "React",
-  //   img: require("./red.jpg"),
-  // },
-  // {
-  //   name: "Node.js",
-  //   img: require("./blue.jpg"),
-  // },
-  // {
-  //   name: "React",
-  //   img: require("./red.jpg"),
-  // },
   {
-    name: "Node.js",
-    img: require("./blue.jpg"),
+    name: "Ocaml",
+    img: ocaml,
   }
+  
 ];
 
 function App() {
@@ -92,6 +136,8 @@ function App() {
   }));
   return (
     <div className="App">
+        <Threads color={[1, 1, 1]} amplitude={3} distance={0} enableMouseInteraction={true} style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 0 }} />
+
       <section className="App-Navbar">
         <nav>
           <ul className="Nav-Links">
@@ -104,13 +150,12 @@ function App() {
       </section>
       {/* main welcome screen */}
       <section className="Section-Heading">
-        <Threads color={[1, 1, 1]} amplitude={5} distance={0} enableMouseInteraction={true} style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 0 }} />
         <div className="Section-Heading-Content">
           <h1>Connor Russi</h1>
           <p>
-            Computer Science student at Texas A&M with a minor in Business.
-            I build full-stack systems, immersive VR experiences, and scalable software
-            with an emphasis on clean architecture and leadership-driven design.
+            Computer Science student at Texas A&M
+            <br />
+            Aspiring Software Engineer
           </p>
         </div>
       </section>
@@ -118,12 +163,14 @@ function App() {
       {/* about me */}
       <section className="Section-About AboutMe">
         <div className="Section-TopHeading"><h2>About Me</h2></div>
-        <p>
-          I’m a Computer Science student at Texas A&M pursuing a minor in Business.
-          I enjoy building full-stack applications and learning technologies by applying them to real problems.
-          Recently, I’ve been experimenting with AI techniques like LoRA fine-tuning to better understand how modern AI systems are trained and integrated into software products.
-          I’m currently seeking Software Engineering internship opportunities for Summer 2026.
-        </p>
+        <div className="About-Content">
+          <p>
+            I’m a Computer Science student at Texas A&M pursuing a minor in Business.
+            I enjoy building full-stack applications and learning technologies by applying them to real problems.
+            Recently, I’ve been experimenting with AI techniques like LoRA fine-tuning to better understand how modern AI systems are trained and integrated into software.
+            I’m currently seeking Software Engineering internship opportunities for Summer 2026.
+          </p>
+        </div>
         <LogoLoop logos={techLogos} speed={50} direction="left" />
 
       </section>
@@ -134,56 +181,10 @@ function App() {
         <div className="Section-TopHeading"><h2>Projects</h2></div>
         <div className = "Projects">
           {Projects.map((project, index) => (
-            <div key={index} className="Project-Card">
-              <img
-                src={project.image}
-                alt={project.title}
-                className="Project-Image"
-              />
-              <div className="Project-Content">
-                <h3>{project.title}</h3>
-                <p className="Project-Description">{project.description}</p>
-                <div className="Project-Tech">
-                  {project.technologies.split(",").map((tech, idx) => (
-                    <span key={idx} className="Tech-Tag">{tech.trim()}</span>
-                  ))}
-                </div>
-                <div className="Project-Links">
-                  {project.gitHubLink && (
-                    <a
-                      href={project.gitHubLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="Project-Button"
-                    >
-                      GitHub
-                    </a>
-                  )}
-                  {project.deployedLink && (
-                    <a
-                      href={project.deployedLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="Project-Button"
-                    >
-                      Deployed Site
-                    </a>
-                  )}
-                  {project.downloadLink && (
-                    <a
-                      href={project.downloadLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="Project-Button"
-                    >
-                      Download Here
-                    </a>
-                  )}
-                </div>
-              </div>
-            </div>
+            <ProjectCard key={index} project={project} />
           ))}
         </div>
+     
       </section>
 
       {/* experience */}

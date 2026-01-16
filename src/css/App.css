@@ -8,7 +8,7 @@
 }
 
 html, body {
-  background-color: #282c34;
+  background-color: #000000;
   height: 100%;
   color: white;
 }
@@ -24,7 +24,7 @@ p {
   font-size: 20px;
 }
 .Section-Heading {
-  background: #000000;
+  /* background: #000000; */
   min-height: 100vh;
   height: 100vh;
   margin-top: 0;
@@ -45,7 +45,7 @@ p {
   align-items: center;
   justify-content: center;
   height: 100%;
-  width: 25%;
+  width: 30%;
   text-align: center;
   /* glow */
   color: #fff;
@@ -62,21 +62,21 @@ p {
   text-align: center;
 }
 .Section-About {
-  background: #06720a;
+  /* background: #06720a; */
   padding: 36px 0;
 }
 
 .Section-Projects {
-  background: #57097d;
+  /* background: #57097d; */
   padding: 36px 0;
 }
 
 .Section-Experience {
-  background: #a49719;
+  /* background: #a49719; */
   padding: 36px 0;
 }
 .Section-Contact {
-  background: #d90429;
+  /* background: #d90429; */
   padding: 36px 0;
 }
 
@@ -120,13 +120,22 @@ p {
   color: #717373;
 }
 
+.About-Content {
+  max-width: 800px;
+  margin: 0 auto;
+  font-size: 1.1rem;
+  color: var(--ParagraphColor);
+  line-height: 1.6;
+  text-align: center;
+}
+
 
 
 
 .Projects {
   margin: 0 auto 50px auto;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
   gap: 32px;
   max-width: 1152px;
   padding: 0 20px;
@@ -140,7 +149,8 @@ p {
   transition: box-shadow 0.2s ease, transform 0.2s;
   display: flex;
   flex-direction: column;
-  min-height: 420px;
+  min-height: 500px;
+  
 }
 
 .Project-Card:hover {
@@ -152,6 +162,13 @@ p {
   width: 100%;
   height: 200px;
   object-fit: cover;
+  opacity: 1;
+  transition: opacity 0.2s;
+  min-height: 200px; /* Ensures the image does not shrink below this height */
+}
+
+.Project-Image.fade {
+  opacity: 0;
 }
 
 .Project-Content {
