@@ -50,7 +50,7 @@ function ProjectCard({ project }, cycleInterval = 5000, slideDuration = 1000) {
                     overflow: "hidden",
                     width: "100%",
                     height: "100%",
-                    minHeight: "100px",
+                    minHeight: "400px",
                 }}
             >
                 <img
