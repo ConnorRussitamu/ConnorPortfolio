@@ -4,6 +4,8 @@ import "./LogoLoop.js";
 import LogoLoop from "./LogoLoop";
 import Threads from "./Threads";
 import ProjectCard from "./ProjectCard";
+import emailjs from "emailjs-com";
+
 
 import cSharp from "./Images/TechImages/C-Sharp_Logo.svg";
 import cpp from "./Images/TechImages/cpp.svg";
@@ -19,6 +21,7 @@ import reactImage from "./Images/TechImages/react.svg";
 import unity from "./Images/TechImages/unity.svg";
 import ocaml from "./Images/TechImages/ocaml.svg";
 import html from "./Images/TechImages/html.svg";
+import resumePDF from "./Russi_Connor_Resume.pdf";
 
 const Projects = [
   {
@@ -33,40 +36,68 @@ const Projects = [
       require("./Images/panda/pandaLogin.png"),
     ],
     description: "Full-stack restaurant management app. Features include a Kiosk with Gemini-powered assistant, cashier workflow, inventory, menu, and employee management, and real-time charts for branch performance, menu, and kitchen tracking. Feel free to explore globally deployed application using these logins: \n \n Manager: username: testMan, password: password. \n EmployeeLogin: username: testUser, password: password.",
-    technologies: "React, Node.js, Express, MongoDB",
-    gitHubLink: "https://github.com/connorrussi/Full-Stack-POS-System",
+    technologies: "React, Node.js, Express, SQL, JavaScript, HTML, CSS, Gemini API, REST APIs",
+    gitHubLink: "https://github.com/CSCE-331-Fall-25/CSCE331_Project_3_Team34",
     deployedLink: "https://csce331-project-3-team34-dueo.onrender.com",
   },
   {
-    title: "VR Educational Game",
-    images: [require("./yellow.png"), require("./blue.jpg"), require("./red.jpg")],
-    description: "Immersive VR game focused on education and interaction.",
-    technologies: "Unity, C#, Oculus SDK",
-    gitHubLink: "https://github.com/connorrussi/VR-Educational-Game",
-    downloadLink: "https://vreducationalgame.example.com",
+    title: "Saloon Simulator VR Game",
+    images: [require("./Images/unityTemp.png")],
+    description: "Saloon Simulator is a VR experience for the Oculus Quest, built in Unity with C#. I developed a modular system using classes for interactive objects, enabling new items to be added quickly while maintaining consistent functionality. I applied Human-Computer Interaction principles from *The Design of Everyday Things* by Don Norman to ensure experiences are understandable and intuitive, demonstrating how VR forces designers to carefully consider user experience and interaction.",
+    technologies: "Unity, C#, XR Development, Human-Computer Interaction",
+    gitHubLink: "https://github.com/ConnorRussi/Saloon_Simulator",
+    // downloadLink: "https://vreducationalgame.example.com",
   },
   {
     title: "Single Core Y-86 Sequential architecture CPU",
-    images: [require("./red.jpg"), require("./blue.jpg"), require("./yellow.png")],
-    description: "Single-core sequential CPU implementing fetch, execute, and PC update stages.",
-    technologies: "Computer Architecture",
+    images: [require("./Images/Cpu/cpu1.png"), require("./Images/Cpu/cpu2.png"), require("./Images/Cpu/cpu3.png")],
+    description: "Built the Fetch, Execute, and PC update stages of a Y-86 CPU while collaborating on the Memory and Decode stages. Designed test cases by breaking complex operations into simple problems, ensuring correctness and supporting smooth instruction conversion into Y-86. Focused on modular design and clear, maintainable architecture throughout the project.",
+    technologies: "Computer Architecture, WaveDrom, Y-86 Instruction Set",
   },
 ];
 
 const Experience = [
   {
-    title: "Head Supervisor",
+    title: "Head Supervisor (Yellow Pot)",
     company: "Off Campus Aggies",
     description: "Led a team of 50+ students on an active construction site, ensuring safety and efficiency.",
     duration: "Jan 2023-Jan 2024",
-    image: require("./red.jpg"), // Replace with your image or a placeholder
+    image: require("./Images/exp/oca.png"), // Replace with your image or a placeholder
   },
   {
     title: "Kids Room Lead",
     company: "Grace Bible Church",
     description: "Managed and organized activities for children during church services.",
     duration: "Sep 2025-Present",
-    image: require("./blue.jpg"), // Replace with your image or a placeholder
+    image: require("./Images/exp/grace.PNG"), // Replace with your image or a placeholder
+  },
+  {
+    title: "Male Counselor",
+    company: "Sambica",
+    description: "Supervised and mentored campers, ensuring a safe and enjoyable experience.",
+    duration: "Summers 2024-2025",
+    image: require("./Images/exp/sambica.PNG"), // Replace with your image or a placeholder
+  },
+  {
+    title: "Head Fleet Mechanic (Mech Pot)",
+    company: "Student Bonfire",
+    description: "Led a team of mechanics in maintaining and repairing a fleet of vehicles for bonfire construction.",
+    duration: "Jan 2025-Nov 2025",
+    image: require("./Images/exp/bonfire.png"), // Replace with your image or a placeholder
+  },
+  {
+    title: "Guest Advocate",
+    company: "Target",
+    description: "Provided excellent customer service and resolved guest issues efficiently.",
+    duration: "Sep 2021-Dec 2023",
+    image: require("./Images/exp/target.png"), // Replace with your image or a placeholder
+  },
+  {
+    title: "Owner",
+    company: "Russi Mowers",
+    description: "Founded and operated a lawn care business, managing clients and providing quality service.",
+    duration: "Dec 2016-Aug 2023",
+    image: require("./Images/exp/rm.png"), // Replace with your image or a placeholder
   }
 ];
 const technologies = [
@@ -134,6 +165,38 @@ function App() {
     src: tech.img,
     alt: tech.name,
   }));
+
+  const serviceID = process.env.REACT_APP_EJ_SERVICE_ID;
+  const templateID = process.env.REACT_APP_EJ_TEMPLATE_ID;
+  const publicKey = process.env.REACT_APP_EJ_KEY;
+  const sendEmail = (e) => {
+    e.preventDefault();
+    if(!serviceID || !templateID || !publicKey) {
+      console.error("EmailJS environment variables are not set properly.");
+      alert("Email service is currently unavailable. Please try again later.");
+      console.log(serviceID, templateID, publicKey);
+      return;
+    }
+    emailjs.sendForm(
+      serviceID, // Replace with your EmailJS service ID
+      templateID, // Replace with your EmailJS template ID
+      e.target,
+      publicKey// Replace with your EmailJS user/public key
+    )
+    .then(
+      (result) => {
+        console.log("Email successfully sent!", result.text);
+        alert("Your message has been sent successfully!");
+      },
+      (error) => {
+        console.error("Error sending email:", error.text);
+        alert("There was an error sending your message. Please try again later.");
+      }
+    );
+
+    e.target.reset();
+  };
+
   return (
     <div className="App">
         <Threads color={[1, 1, 1]} amplitude={3} distance={0} enableMouseInteraction={true} style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 0 }} />
@@ -145,11 +208,12 @@ function App() {
             <li><a href="#projects">Projects</a></li>
             <li><a href="#experience">Experience</a></li>
             <li><a href="#contact">Contact Me</a></li>
+            <li><a href={resumePDF} target="_blank" rel="noopener noreferrer" className="Resume-Button">Resume</a></li>
           </ul>
         </nav>
       </section>
       {/* main welcome screen */}
-      <section className="Section-Heading">
+      <section className="Section-Heading" id="home">
         <div className="Section-Heading-Content">
           <h1>Connor Russi</h1>
           <p>
@@ -161,7 +225,7 @@ function App() {
       </section>
 
       {/* about me */}
-      <section className="Section-About AboutMe">
+      <section className="Section-About AboutMe" id="about">
         <div className="Section-TopHeading"><h2>About Me</h2></div>
         <div className="About-Content">
           <p>
@@ -177,7 +241,7 @@ function App() {
 
       {/* Projects */}
       
-      <section className="Section-Projects">
+      <section className="Section-Projects" id="projects">
         <div className="Section-TopHeading"><h2>Projects</h2></div>
         <div className = "Projects">
           {Projects.map((project, index) => (
@@ -188,7 +252,7 @@ function App() {
       </section>
 
       {/* experience */}
-      <section className="Section-Experience ">
+      <section className="Section-Experience " id="experience">
         <div className="Section-TopHeading"><h2>Experience & Leadership</h2></div>
         <div className = "Experience">
           {Experience.map((exp, idx) => (
@@ -214,15 +278,21 @@ function App() {
       </section>
 
       {/* contact me */}
-      <section className="Section-Contact">
+      <section className="Section-Contact" id="contact">
         <div className="Section-TopHeading"><h2>Contact Me</h2></div>
-        <p>
-          
-        </p>
-          integrate email services here to email me directly from the portfolio
+        <form className="Contact-Form" onSubmit={sendEmail}>
+          <label htmlFor="name">Name:</label>
+          <input type="text" id="name" name="name" placeholder="Your Name" required />
 
+          <label htmlFor="email">Email:</label>
+          <input type="email" id="email" name="email" placeholder="Your Email" required />
+
+          <label htmlFor="message">Message:</label>
+          <textarea id="message" name="message" placeholder="Your Message" required></textarea>
+
+          <button type="submit" className="Contact-Button">Send Message</button>
+        </form>
       </section>
-      {/* <Threads color={[1, 1, 1]} amplitude={1} distance={0.2} enableMouseInteraction={false} style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 0 }} /> */}
 
     </div>
   );

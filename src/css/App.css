@@ -7,6 +7,7 @@
   --NavbarBackground: #1f2022;
 }
 
+
 html, body {
   background-color: #000000;
   height: 100%;
@@ -49,9 +50,11 @@ p {
   text-align: center;
   /* glow */
   color: #fff;
-  text-shadow: 0 0 0px #ffffff, 0 0 16px #ffffff, 0 0 32px #ffffff;
+  text-shadow: 0 0 0px #fff9f9, 0 0 16px #ffffff, 0 0 32px #cccccc;
 }
-
+.Section-Heading-Content h1 {
+  font-size: 4rem; /* Adjust this value to make the text larger */
+}
 .Section-TopHeading {
   width: 100%;
   display: flex;
@@ -75,10 +78,10 @@ p {
   /* background: #a49719; */
   padding: 36px 0;
 }
-.Section-Contact {
-  /* background: #d90429; */
+/* .Section-Contact {
+  background: #d90429;
   padding: 36px 0;
-}
+} */ 
 
 
 
@@ -117,7 +120,8 @@ p {
   transition: color 0.2s;
 }
 .Nav-Links li a:hover {
-  color: #717373;
+  color: #efeded;
+  text-shadow: 0 0 0px #000000, 0 0 16px #000000, 0 0 32px #000000;
 }
 
 .About-Content {
@@ -345,5 +349,98 @@ p {
   text-align: center;
   font-weight: 500;
   margin-top: 2px;
+}
+
+.Section-Contact *,
+.Section-Contact *::before,
+.Section-Contact *::after {
+  box-sizing: border-box;
+}
+.Section-Contact {
+  padding: 72px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Form container */
+.Contact-Form {
+  width: 100%;
+  max-width: 500px;
+  background: #1f2022;
+  border-radius: 16px;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+}
+
+/* Labels */
+.Contact-Form label {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--ParagraphColor);
+}
+
+/* Inputs & textarea */
+.Contact-Form input,
+.Contact-Form textarea {
+  width: 100%;
+  background: #2c2f33;
+  border: 1px solid #3a3d41;
+  border-radius: 10px;
+  padding: 12px 14px;
+  font-size: 1rem;
+  color: #ffffff;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.Contact-Form textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+/* Focus states */
+.Contact-Form input:focus,
+.Contact-Form textarea:focus {
+  outline: none;
+  border-color: #21a1f3;
+  box-shadow: 0 0 0 2px rgba(33, 161, 243, 0.25);
+}
+
+/* Placeholder text */
+.Contact-Form input::placeholder,
+.Contact-Form textarea::placeholder {
+  color: #8b8f94;
+}
+
+/* Submit button */
+.Contact-Button {
+  margin-top: 12px;
+  align-self: flex-start;
+  background: var(--ButtonBackground);
+  color: var(--ButtonTextColor);
+  border: none;
+  border-radius: 10px;
+  padding: 10px 24px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s, box-shadow 0.15s;
+}
+
+/* Button hover */
+.Contact-Button:hover {
+  background: #21a1f3;
+  color: #ffffff;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(33, 161, 243, 0.35);
+}
+
+/* Button active */
+.Contact-Button:active {
+  transform: translateY(0);
+  box-shadow: 0 3px 8px rgba(33, 161, 243, 0.3);
 }
 

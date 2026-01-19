@@ -34,6 +34,16 @@ function ProjectCard({ project }, cycleInterval = 5000, slideDuration = 1000) {
         stopRotation();
     };
 
+    const handleCardClick = (e) => {
+        // Prevent navigation if a link inside the card is clicked
+        if (e.target.tagName === "A") return;
+
+        // Open GitHub link in a new tab if it exists
+        if (project.gitHubLink) {
+            window.open(project.gitHubLink, "_blank");
+        }
+    };
+
     const bottomImage = project.images[imgIdx];
     const topImage = project.images[(imgIdx + 1) % project.images.length];
 
@@ -42,6 +52,7 @@ function ProjectCard({ project }, cycleInterval = 5000, slideDuration = 1000) {
             className="Project-Card"
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
+            onClick={handleCardClick} // Added click handler for the card
         >
             <div
                 className={`Image-Wrapper slide ${animating ? "animating" : ""}`}
